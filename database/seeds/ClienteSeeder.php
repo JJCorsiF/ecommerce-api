@@ -21,7 +21,7 @@ class ClienteSeeder extends Seeder
             $sexo = $faker->randomElement(['masculino', 'feminino']);
 
             Cliente::create([
-                'id_cliente' => $faker->uuid,
+                'uuid_cliente' => $faker->uuid,
                 'codigo_cliente' => Str::random(20),
                 'nome' => $faker->name($sexo),
                 'cpf' => $faker->cpf(false),

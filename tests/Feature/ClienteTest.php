@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Cliente;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ClienteTest extends TestCase
@@ -11,11 +11,11 @@ class ClienteTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic feature test example.
+     * @test
      *
      * @return void
      */
-    public function testTodosOsClientesSaoListados()
+    public function todosOsClientesSaoListados()
     {
         $response = $this->get('/clientes');
         $response->assertStatus(200);
@@ -30,5 +30,34 @@ class ClienteTest extends TestCase
         ]);
         $numeroDeClientesRetornados = count($response->decodeResponseJson());
         $this->assertDatabaseCount('clientes', $numeroDeClientesRetornados);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function umClientePodeSerListado()
+    {
+        $cliente = Cliente::first();
+        $response = $this->get('/clientes/' . $cliente->id_cliente);
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'codigo_cliente',
+            'nome',
+            'cpf',
+            'sexo',
+            'email',
+        ]);
+
+        $clienteRetornado = $response->decodeResponseJson();
+
+        $this->assertDatabaseHas('clientes', [
+            'codigo_cliente' => $clienteRetornado['codigo_cliente'],
+            'nome' => $clienteRetornado['nome'],
+            'cpf' => $clienteRetornado['cpf'],
+            'sexo' => $clienteRetornado['sexo'],
+            'email' => $clienteRetornado['email'],
+        ]);
     }
 }

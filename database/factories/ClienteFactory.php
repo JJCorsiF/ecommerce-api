@@ -10,7 +10,7 @@ $factory->define(Cliente::class, function (Faker $faker) {
     $sexo = $faker->randomElement(['masculino', 'feminino']);
 
     return [
-        'id_cliente' => $faker->uuid,
+        'uuid_cliente' => $faker->uuid,
         'codigo_cliente' => Str::random(10),
         'nome' => $faker->name($sexo),
         'cpf' => $faker->cpf(false),

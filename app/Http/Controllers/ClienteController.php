@@ -10,4 +10,9 @@ class ClienteController extends Controller
     {
         return Cliente::all();
     }
+
+    public function buscarCliente($id)
+    {
+        return Cliente::where('id_cliente', $id)->first();
+    }
 }
