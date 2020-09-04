@@ -65,4 +65,45 @@ class ProdutoTest extends TestCase
             'valor' => $produtoRetornado['valor'],
         ]);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function umProdutoPodeSerCadastrado()
+    {
+        $novoProduto = [
+            'produto' => [
+                'codigo_produto' => 'Código do Produto',
+                'nome' => 'Tecido',
+                'cor' => 'vermelho',
+                'tamanho' => 'médio',
+                'valor' => 20.0,
+            ],
+        ];
+
+        $response = $this->post('/produtos', $novoProduto);
+        $response->assertStatus(201);
+
+        $response->assertJsonStructure([
+            'produto' => [
+                'codigo_produto',
+                'nome',
+                'cor',
+                'tamanho',
+                'valor',
+            ],
+        ]);
+
+        $produto = $novoProduto['produto'];
+
+        $this->assertDatabaseHas('produtos', [
+            'codigo_produto' => $produto['codigo_produto'],
+            'nome' => $produto['nome'],
+            'cor' => $produto['cor'],
+            'tamanho' => $produto['tamanho'],
+            'valor' => $produto['valor'],
+        ]);
+    }
 }

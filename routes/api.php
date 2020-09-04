@@ -25,3 +25,4 @@ Route::delete('/clientes/{id}', 'ClienteController@deletarCliente');
 
 Route::get('/produtos', 'ProdutoController@listarProdutos');
 Route::get('/produtos/{id}', 'ProdutoController@buscarProduto');
+Route::post('/produtos', 'ProdutoController@adicionarProduto');
