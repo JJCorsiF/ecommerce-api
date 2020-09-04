@@ -21,3 +21,4 @@ Route::get('/clientes', 'ClienteController@listarClientes');
 Route::get('/clientes/{id}', 'ClienteController@buscarCliente');
 Route::post('/clientes', 'ClienteController@adicionarCliente');
 Route::put('/clientes/{id}', 'ClienteController@atualizarCliente');
+Route::delete('/clientes/{id}', 'ClienteController@deletarCliente');

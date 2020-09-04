@@ -95,14 +95,14 @@ class ClienteTest extends TestCase
             ],
         ]);
 
-        $clienteRetornado = $novoCliente['cliente'];
+        $cliente = $novoCliente['cliente'];
 
         $this->assertDatabaseHas('clientes', [
-            'codigo_cliente' => $clienteRetornado['codigo_cliente'],
-            'nome' => $clienteRetornado['nome'],
-            'cpf' => $clienteRetornado['cpf'],
-            'sexo' => $clienteRetornado['sexo'],
-            'email' => $clienteRetornado['email'],
+            'codigo_cliente' => $cliente['codigo_cliente'],
+            'nome' => $cliente['nome'],
+            'cpf' => $cliente['cpf'],
+            'sexo' => $cliente['sexo'],
+            'email' => $cliente['email'],
         ]);
     }
 
@@ -144,6 +144,37 @@ class ClienteTest extends TestCase
                 'sexo' => $payload['sexo'],
                 'email' => $payload['email'],
             ],
+        ]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function umClientePodeSerDeletado()
+    {
+        $cliente = Cliente::first();
+
+        $response = $this->delete('/clientes/' . $cliente->id_cliente);
+
+        $response->assertStatus(204);
+
+        $this->assertDatabaseMissing('clientes', [
+            'id_cliente' => $cliente->id_cliente,
+            'codigo_cliente' => $cliente->codigo_cliente,
+            'nome' => $cliente->nome,
+            'cpf' => $cliente->cpf,
+            'sexo' => $cliente->sexo,
+            'email' => $cliente->email,
+        ]);
+        $this->assertDeleted('clientes', [
+            'id_cliente' => $cliente->id_cliente,
+            'codigo_cliente' => $cliente->codigo_cliente,
+            'nome' => $cliente->nome,
+            'cpf' => $cliente->cpf,
+            'sexo' => $cliente->sexo,
+            'email' => $cliente->email,
         ]);
     }
 }

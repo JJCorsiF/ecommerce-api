@@ -52,11 +52,21 @@ class ClienteController extends Controller
 
     public function atualizarCliente(Request $request, $id)
     {
-        $cliente = Cliente::where('id_cliente', $id)->first();
+        $cliente = Cliente::where('id_cliente', $id)->firstOrFail();
         $cliente->update($request->all());
 
         return response()->json([
             'cliente' => $cliente,
         ], 200);
+    }
+
+    public function deletarCliente($id)
+    {
+        $cliente = Cliente::where('id_cliente', $id)->firstOrFail();
+        $cliente->delete();
+
+        return response()->json([
+            'cliente' => $cliente,
+        ], 204);
     }
 }
