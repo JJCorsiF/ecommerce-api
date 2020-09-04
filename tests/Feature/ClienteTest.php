@@ -20,15 +20,17 @@ class ClienteTest extends TestCase
         $response = $this->get('/clientes');
         $response->assertStatus(200);
         $response->assertJsonStructure([
-            '*' => [
-                'codigo_cliente',
-                'nome',
-                'cpf',
-                'sexo',
-                'email',
-            ]
+            'clientes' => [
+                '*' => [
+                    'codigo_cliente',
+                    'nome',
+                    'cpf',
+                    'sexo',
+                    'email',
+                ]
+            ],
         ]);
-        $numeroDeClientesRetornados = count($response->decodeResponseJson());
+        $numeroDeClientesRetornados = count($response->decodeResponseJson()['clientes']);
         $this->assertDatabaseCount('clientes', $numeroDeClientesRetornados);
     }
 
@@ -43,14 +45,57 @@ class ClienteTest extends TestCase
         $response = $this->get('/clientes/' . $cliente->id_cliente);
         $response->assertStatus(200);
         $response->assertJsonStructure([
-            'codigo_cliente',
-            'nome',
-            'cpf',
-            'sexo',
-            'email',
+            'cliente' => [
+                'codigo_cliente',
+                'nome',
+                'cpf',
+                'sexo',
+                'email',
+            ],
         ]);
 
-        $clienteRetornado = $response->decodeResponseJson();
+        $clienteRetornado = $response->decodeResponseJson()['cliente'];
+
+        $this->assertDatabaseHas('clientes', [
+            'codigo_cliente' => $clienteRetornado['codigo_cliente'],
+            'nome' => $clienteRetornado['nome'],
+            'cpf' => $clienteRetornado['cpf'],
+            'sexo' => $clienteRetornado['sexo'],
+            'email' => $clienteRetornado['email'],
+        ]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function umClientePodeSerCadastrado()
+    {
+        $novoCliente = [
+            'cliente' => [
+                'codigo_cliente' => 'Código do Cliente',
+                'nome' => 'John Doe',
+                'cpf' => '98765432100',
+                'sexo' => 'masculino',
+                'email' => 'a@b.c',
+            ],
+        ];
+
+        $response = $this->post('/clientes', $novoCliente);
+        $response->assertStatus(201);
+
+        $response->assertJsonStructure([
+            'cliente' => [
+                'codigo_cliente',
+                'nome',
+                'cpf',
+                'sexo',
+                'email',
+            ],
+        ]);
+
+        $clienteRetornado = $novoCliente['cliente'];
 
         $this->assertDatabaseHas('clientes', [
             'codigo_cliente' => $clienteRetornado['codigo_cliente'],

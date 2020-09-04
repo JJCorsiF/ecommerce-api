@@ -19,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/clientes', 'ClienteController@listarClientes');
 Route::get('/clientes/{id}', 'ClienteController@buscarCliente');
+Route::post('/clientes', 'ClienteController@adicionarCliente');
