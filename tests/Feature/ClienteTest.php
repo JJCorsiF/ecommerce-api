@@ -122,7 +122,6 @@ class ClienteTest extends TestCase
             'email' => 'a@b.c',
         ];
         $response = $this->put('/clientes/' . $cliente->id_cliente, $payload);
-        // $this->assertEquals('', json_encode($response->decodeResponseJson()));
 
         $response->assertStatus(200);
 

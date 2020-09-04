@@ -49,4 +49,14 @@ class ProdutoController extends Controller
             ], 500);
         }
     }
+
+    public function atualizarProduto(Request $request, $id)
+    {
+        $produto = Produto::where('id_produto', $id)->firstOrFail();
+        $produto->update($request->all());
+
+        return response()->json([
+            'produto' => $produto,
+        ], 200);
+    }
 }

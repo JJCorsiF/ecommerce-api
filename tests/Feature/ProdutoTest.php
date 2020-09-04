@@ -106,4 +106,44 @@ class ProdutoTest extends TestCase
             'valor' => $produto['valor'],
         ]);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function umProdutoPodeSerAtualizado()
+    {
+        $produto = Produto::first();
+        $payload = [
+            'codigo_produto' => 'Código do Produto',
+            'nome' => 'Tecido',
+            'cor' => 'vermelho',
+            'tamanho' => 'médio',
+            'valor' => 20.0,
+        ];
+        $response = $this->put('/produtos/' . $produto->id_produto, $payload);
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('produtos', [
+            'id_produto' => $produto->id_produto,
+            'codigo_produto' => $payload['codigo_produto'],
+            'nome' => $payload['nome'],
+            'cor' => $payload['cor'],
+            'tamanho' => $payload['tamanho'],
+            'valor' => $payload['valor'],
+        ]);
+
+        $response->assertJson([
+            'produto' => [
+                'id_produto' => $produto->id_produto,
+                'codigo_produto' => $payload['codigo_produto'],
+                'nome' => $payload['nome'],
+                'cor' => $payload['cor'],
+                'tamanho' => $payload['tamanho'],
+                'valor' => $payload['valor'],
+            ],
+        ]);
+    }
 }
