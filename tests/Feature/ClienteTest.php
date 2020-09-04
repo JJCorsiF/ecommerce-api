@@ -105,4 +105,45 @@ class ClienteTest extends TestCase
             'email' => $clienteRetornado['email'],
         ]);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function umClientePodeSerAtualizado()
+    {
+        $cliente = Cliente::first();
+        $payload = [
+            'codigo_cliente' => 'Código do Cliente',
+            'nome' => 'John Doe',
+            'cpf' => '98765432100',
+            'sexo' => 'masculino',
+            'email' => 'a@b.c',
+        ];
+        $response = $this->put('/clientes/' . $cliente->id_cliente, $payload);
+        // $this->assertEquals('', json_encode($response->decodeResponseJson()));
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('clientes', [
+            'id_cliente' => $cliente->id_cliente,
+            'codigo_cliente' => $payload['codigo_cliente'],
+            'nome' => $payload['nome'],
+            'cpf' => $payload['cpf'],
+            'sexo' => $payload['sexo'],
+            'email' => $payload['email'],
+        ]);
+
+        $response->assertJson([
+            'cliente' => [
+                'id_cliente' => $cliente->id_cliente,
+                'codigo_cliente' => $payload['codigo_cliente'],
+                'nome' => $payload['nome'],
+                'cpf' => $payload['cpf'],
+                'sexo' => $payload['sexo'],
+                'email' => $payload['email'],
+            ],
+        ]);
+    }
 }

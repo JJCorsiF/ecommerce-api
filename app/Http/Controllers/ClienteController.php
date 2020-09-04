@@ -49,4 +49,14 @@ class ClienteController extends Controller
             ], 500);
         }
     }
+
+    public function atualizarCliente(Request $request, $id)
+    {
+        $cliente = Cliente::where('id_cliente', $id)->first();
+        $cliente->update($request->all());
+
+        return response()->json([
+            'cliente' => $cliente,
+        ], 200);
+    }
 }
