@@ -8,7 +8,10 @@
 </head>
 
 <body>
-    <p>Pedido: {{$pedido->id_pedido}}</p>
+    <p>Código do Pedido: {{$pedido->codigo_pedido}}</p>
+    <p>Data do Pedido: {{$pedido->data_pedido}}</p>
+    <p>Observação: {{$pedido->observacao}}</p>
+    <p>Forma de pagamento: {{$pedido->forma_pagamento}}</p>
     <p>Nome do cliente: {{ $cliente->nome }}</p>
     <p>Email do cliente: {{ $cliente->email }}</p>
     <p>CPF: {{ $cliente->cpf }}</p>
@@ -24,18 +27,21 @@
             </tr>
         </thead>
         <tbody>
+            @php ($total = 0)
             @foreach ($pedido->produtos as $pedido)
             <tr>
-                <td>{{ $data->nome }}</td>
-                <td>{{ $data->cor }}</td>
-                <td>{{ $data->tamanho }}</td>
-                <td>{{ $data->valor }}</td>
-                <td>Quantidade: {{ $data->valor }}</td>
-                <td>Subtotal: {{ $data->valor }}</td>
+                <td>{{ $pedido->nome }}</td>
+                <td>{{ $pedido->cor }}</td>
+                <td>{{ $pedido->tamanho }}</td>
+                <td>R$ {{ $pedido->valor }}</td>
+                <td>Quantidade: {{ $pedido->pivot['quantidade'] }}</td>
+                @php ($subtotal = $pedido->pivot['quantidade'] * $pedido->valor)
+                <td>Subtotal: R$ {{ $subtotal }}</td>
+                @php ($total += $subtotal)
             </tr>
             @endforeach
             <tr>
-                Total:
+                <td>Total: R$ {{ $total }}</td>
             </tr>
         </tbody>
     </table>
