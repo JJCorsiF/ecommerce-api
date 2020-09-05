@@ -22,7 +22,7 @@ class PedidoSeeder extends Seeder
 
         $faker = \Faker\Factory::create('pt_BR');
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $pedido = Pedido::create([
                 'id_cliente' => Cliente::inRandomOrder()->first()->id_cliente,
                 'uuid_pedido' => $faker->uuid,

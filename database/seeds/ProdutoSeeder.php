@@ -20,7 +20,7 @@ class ProdutoSeeder extends Seeder
 
         $faker = \Faker\Factory::create('pt_BR');
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             Produto::create([
                 'uuid_produto' => $faker->uuid,
                 'codigo_produto' => Str::random(20),

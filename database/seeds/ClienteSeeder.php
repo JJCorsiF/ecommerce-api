@@ -20,7 +20,7 @@ class ClienteSeeder extends Seeder
 
         $faker = \Faker\Factory::create('pt_BR');
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $sexo = $faker->randomElement(['masculino', 'feminino']);
 
             Cliente::create([
