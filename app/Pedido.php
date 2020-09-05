@@ -8,6 +8,7 @@ class Pedido extends Model
 {
     // const CREATED_AT = 'data_criacao';
     // const UPDATED_AT = 'ultima_atualizacao';
+    // const DELETED_AT = 'deletado_em';
 
     protected $fillable = ['id_cliente', 'uuid_pedido', 'codigo_pedido', 'data_pedido', 'observacao', 'forma_pagamento',];
 

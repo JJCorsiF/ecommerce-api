@@ -8,6 +8,7 @@ class Produto extends Model
 {
     // const CREATED_AT = 'data_criacao';
     // const UPDATED_AT = 'ultima_atualizacao';
+    // const DELETED_AT = 'deletado_em';
 
     protected $fillable = ['uuid_produto', 'codigo_produto', 'nome', 'cor', 'tamanho', 'valor',];
 

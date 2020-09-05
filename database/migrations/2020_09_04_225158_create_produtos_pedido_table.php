@@ -16,9 +16,10 @@ class CreateProdutosPedidoTable extends Migration
         Schema::create('produtos_pedido', function (Blueprint $table) {
             $table->unsignedInteger('id_pedido');
             $table->unsignedInteger('id_produto');
-            $table->foreign('id_pedido')->references('id_pedido')->on('pedidos');
-            $table->foreign('id_produto')->references('id_produto')->on('produtos');
+            $table->foreign('id_pedido')->references('id_pedido')->on('pedidos')->onDelete('cascade');
+            $table->foreign('id_produto')->references('id_produto')->on('produtos')->onDelete('cascade');
             $table->integer('quantidade')->default(1);
+            $table->softDeletes();
         });
     }
 
