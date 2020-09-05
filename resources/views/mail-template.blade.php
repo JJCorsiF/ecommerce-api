@@ -24,16 +24,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($pedido->produtos as $data)
+            @foreach ($pedido->produtos as $pedido)
             <tr>
                 <td>{{ $data->nome }}</td>
                 <td>{{ $data->cor }}</td>
                 <td>{{ $data->tamanho }}</td>
                 <td>{{ $data->valor }}</td>
+                <td>Quantidade: {{ $data->valor }}</td>
+                <td>Subtotal: {{ $data->valor }}</td>
             </tr>
             @endforeach
             <tr>
-                Subtotal:
+                Total:
             </tr>
         </tbody>
     </table>

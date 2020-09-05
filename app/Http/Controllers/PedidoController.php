@@ -9,6 +9,7 @@ use App\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use PDF;
 
 class PedidoController extends Controller
 {
@@ -107,5 +108,16 @@ class PedidoController extends Controller
             'mensagem' => 'Email enviado com sucesso.',
             'pedidoComProdutos' => $pedidoComProdutos,
         ], 200);
+    }
+
+    public function gerarPedidoEmPdf($id)
+    {
+        $pedidoComProdutos = Pedido::with('produtos')->where('id_pedido', $id)->orWhere('uuid_pedido', $id)->first();
+        $cliente = Cliente::where('id_cliente', $pedidoComProdutos->id_cliente)->first();
+
+        $data = ['title' => 'Seu pedido', 'pedido' => $pedidoComProdutos, 'cliente' => $cliente,];
+        $pdf = PDF::loadView('mail-template', $data);
+
+        return $pdf->download('relatorio-pedido-' . $pedidoComProdutos->uuid_pedido . '.pdf');
     }
 }

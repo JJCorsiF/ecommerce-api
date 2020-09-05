@@ -35,3 +35,4 @@ Route::post('/pedidos', 'PedidoController@adicionarPedido');
 Route::put('/pedidos/{id}', 'PedidoController@atualizarPedido');
 Route::delete('/pedidos/{id}', 'PedidoController@deletarPedido');
 Route::post('/pedidos/{id}/sendmail', 'PedidoController@enviarPedidoPorEmail');
+Route::post('/pedidos/{id}/report', 'PedidoController@gerarPedidoEmPdf');

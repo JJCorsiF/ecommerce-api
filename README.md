@@ -88,4 +88,4 @@ DELETE​ /pedidos/{id}
 
 POST​ /pedidos/{id}/sendmail
 
-*POST​/pedidos/{id}/report (em desenvolvimento)
+POST​/pedidos/{id}/report
