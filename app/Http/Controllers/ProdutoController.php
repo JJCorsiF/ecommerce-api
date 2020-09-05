@@ -59,4 +59,14 @@ class ProdutoController extends Controller
             'produto' => $produto,
         ], 200);
     }
+
+    public function deletarProduto($id)
+    {
+        $produto = Produto::where('id_produto', $id)->firstOrFail();
+        $produto->delete();
+
+        return response()->json([
+            'produto' => $produto,
+        ], 204);
+    }
 }

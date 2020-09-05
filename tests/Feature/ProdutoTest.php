@@ -146,4 +146,35 @@ class ProdutoTest extends TestCase
             ],
         ]);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function umProdutoPodeSerDeletado()
+    {
+        $produto = Produto::first();
+
+        $response = $this->delete('/produtos/' . $produto->id_produto);
+
+        $response->assertStatus(204);
+
+        $this->assertDatabaseMissing('produtos', [
+            'id_produto' => $produto->id_produto,
+            'codigo_produto' => $produto->codigo_produto,
+            'nome' => $produto->nome,
+            'cor' => $produto->cor,
+            'tamanho' => $produto->tamanho,
+            'valor' => $produto->valor,
+        ]);
+        $this->assertDeleted('produtos', [
+            'id_produto' => $produto->id_produto,
+            'codigo_produto' => $produto->codigo_produto,
+            'nome' => $produto->nome,
+            'cor' => $produto->cor,
+            'tamanho' => $produto->tamanho,
+            'valor' => $produto->valor,
+        ]);
+    }
 }
