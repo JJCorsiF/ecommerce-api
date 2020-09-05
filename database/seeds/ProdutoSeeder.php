@@ -2,6 +2,7 @@
 
 use App\Produto;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class ProdutoSeeder extends Seeder
@@ -13,7 +14,9 @@ class ProdutoSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         Produto::truncate();
+        Schema::enableForeignKeyConstraints();
 
         $faker = \Faker\Factory::create('pt_BR');
 

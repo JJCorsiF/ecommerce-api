@@ -22,6 +22,7 @@ class CreateClientesTable extends Migration
             $table->string('sexo', 10);
             $table->string('email', 60);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

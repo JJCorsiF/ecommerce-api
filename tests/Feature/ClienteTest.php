@@ -41,7 +41,7 @@ class ClienteTest extends TestCase
      */
     public function umClientePodeSerListado()
     {
-        $cliente = Cliente::first();
+        $cliente = Cliente::inRandomOrder()->first();
         $response = $this->get('/clientes/' . $cliente->id_cliente);
         $response->assertStatus(200);
         $response->assertJsonStructure([
@@ -113,7 +113,7 @@ class ClienteTest extends TestCase
      */
     public function umClientePodeSerAtualizado()
     {
-        $cliente = Cliente::first();
+        $cliente = Cliente::inRandomOrder()->first();
         $payload = [
             'codigo_cliente' => 'Código do Cliente',
             'nome' => 'John Doe',
@@ -153,7 +153,7 @@ class ClienteTest extends TestCase
      */
     public function umClientePodeSerDeletado()
     {
-        $cliente = Cliente::first();
+        $cliente = Cliente::inRandomOrder()->first();
 
         $response = $this->delete('/clientes/' . $cliente->id_cliente);
 

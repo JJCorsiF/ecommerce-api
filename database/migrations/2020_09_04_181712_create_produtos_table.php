@@ -22,6 +22,7 @@ class CreateProdutosTable extends Migration
             $table->string('tamanho', 15);
             $table->double('valor');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

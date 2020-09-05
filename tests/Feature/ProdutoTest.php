@@ -42,7 +42,7 @@ class ProdutoTest extends TestCase
      */
     public function umProdutoPodeSerListado()
     {
-        $produto = Produto::first();
+        $produto = Produto::inRandomOrder()->first();
         $response = $this->get('/produtos/' . $produto->id_produto);
         $response->assertStatus(200);
         $response->assertJsonStructure([
@@ -114,7 +114,7 @@ class ProdutoTest extends TestCase
      */
     public function umProdutoPodeSerAtualizado()
     {
-        $produto = Produto::first();
+        $produto = Produto::inRandomOrder()->first();
         $payload = [
             'codigo_produto' => 'Código do Produto',
             'nome' => 'Tecido',
@@ -154,7 +154,7 @@ class ProdutoTest extends TestCase
      */
     public function umProdutoPodeSerDeletado()
     {
-        $produto = Produto::first();
+        $produto = Produto::inRandomOrder()->first();
 
         $response = $this->delete('/produtos/' . $produto->id_produto);
 

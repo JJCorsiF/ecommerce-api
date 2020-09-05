@@ -28,3 +28,5 @@ Route::get('/produtos/{id}', 'ProdutoController@buscarProduto');
 Route::post('/produtos', 'ProdutoController@adicionarProduto');
 Route::put('/produtos/{id}', 'ProdutoController@atualizarProduto');
 Route::delete('/produtos/{id}', 'ProdutoController@deletarProduto');
+
+Route::get('/pedidos', 'PedidoController@listarPedidos');
