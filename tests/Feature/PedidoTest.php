@@ -114,4 +114,63 @@ class PedidoTest extends TestCase
             'forma_pagamento' => $pedido['forma_pagamento'],
         ]);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function umPedidoPodeSerAtualizado()
+    {
+        $produtos = Produto::inRandomOrder()->limit(rand(1, 3))->get();
+        $produtosSelecionados = [];
+
+        foreach ($produtos as $produto) {
+            $produtosSelecionados[] = [
+                'id_produto' => $produto->id_produto,
+                'quantidade' => rand(1, 9),
+            ];
+        }
+
+        $pedido = Pedido::inRandomOrder()->first();
+        $payload = [
+            'id_cliente' => Cliente::inRandomOrder()->first()->id_cliente,
+            'codigo_pedido' => 'Código do Pedido',
+            'data_pedido' => (new \DateTime())->format('Y-m-d H:i:s'),
+            'observacao' => 'pedido novo',
+            'forma_pagamento' => 'dinheiro',
+            'produtos' => $produtosSelecionados,
+        ];
+        $response = $this->put('/pedidos/' . $pedido->id_pedido, $payload);
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('pedidos', [
+            'id_pedido' => $pedido->id_pedido,
+            'id_cliente' => $payload['id_cliente'],
+            'codigo_pedido' => $payload['codigo_pedido'],
+            'data_pedido' => $payload['data_pedido'],
+            'observacao' => $payload['observacao'],
+            'forma_pagamento' => $payload['forma_pagamento'],
+        ]);
+
+        foreach ($produtosSelecionados as $produto) {
+            $this->assertDatabaseHas('produtos_pedido', [
+                'id_pedido' => $pedido->id_pedido,
+                'id_produto' => $produto['id_produto'],
+                'quantidade' => $produto['quantidade'],
+            ]);
+        }
+
+        $response->assertJson([
+            'pedido' => [
+                'id_pedido' => $pedido->id_pedido,
+                'id_cliente' => $payload['id_cliente'],
+                'codigo_pedido' => $payload['codigo_pedido'],
+                'data_pedido' => $payload['data_pedido'],
+                'observacao' => $payload['observacao'],
+                'forma_pagamento' => $payload['forma_pagamento'],
+            ],
+        ]);
+    }
 }

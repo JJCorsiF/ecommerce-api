@@ -59,4 +59,27 @@ class PedidoController extends Controller
             ], 500);
         }
     }
+
+    public function atualizarPedido(Request $request, $id)
+    {
+        try {
+            $pedido = Pedido::where('id_pedido', $id)->orWhere('uuid_pedido', $id)->firstOrFail();
+
+            $pedido->update($request->all());
+
+            $produtos = $request->produtos;
+
+            foreach ($produtos as $produto) {
+                $pedido->produtos()->updateExistingPivot($produto['id_produto'], ['quantidade' => $produto['quantidade'],]);
+            }
+
+            return response()->json([
+                'pedido' => $pedido,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
