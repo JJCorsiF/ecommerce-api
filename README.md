@@ -52,7 +52,7 @@ Para iniciar a aplicação, execute o comando:
 $ php artisan serve
 ```
 
-A aplicação iniciará e a API estará disponível em http://127.0.0.1:8000/. Para acessar a rota de clientes, poe exemplo, basta acessar http://127.0.0.1:8000/clientes.
+A aplicação iniciará e a API estará disponível em http://127.0.0.1:8000/. Para acessar a rota de clientes, por exemplo, basta acessar http://127.0.0.1:8000/clientes.
 
 As seguintes rotas estão disponíveis:
 
