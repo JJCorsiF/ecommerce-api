@@ -82,4 +82,14 @@ class PedidoController extends Controller
             ], 500);
         }
     }
+
+    public function deletarPedido($id)
+    {
+        $pedido = Pedido::where('id_pedido', $id)->orWhere('uuid_pedido', $id)->firstOrFail();
+        $pedido->delete();
+
+        return response()->json([
+            'pedido' => $pedido,
+        ], 204);
+    }
 }

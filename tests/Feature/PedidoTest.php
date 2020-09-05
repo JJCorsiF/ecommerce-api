@@ -173,4 +173,33 @@ class PedidoTest extends TestCase
             ],
         ]);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function umPedidoPodeSerDeletado()
+    {
+        $pedido = Pedido::inRandomOrder()->first();
+
+        $response = $this->delete('/pedidos/' . $pedido->id_pedido);
+
+        $response->assertStatus(204);
+
+        $this->assertDatabaseMissing('pedidos', [
+            'id_pedido' => $pedido->id_pedido,
+            'codigo_pedido' => $pedido->codigo_pedido,
+            'data_pedido' => $pedido->data_pedido,
+            'observacao' => $pedido->observacao,
+            'forma_pagamento' => $pedido->forma_pagamento,
+        ]);
+        $this->assertDeleted('pedidos', [
+            'id_pedido' => $pedido->id_pedido,
+            'codigo_pedido' => $pedido->codigo_pedido,
+            'data_pedido' => $pedido->data_pedido,
+            'observacao' => $pedido->observacao,
+            'forma_pagamento' => $pedido->forma_pagamento,
+        ]);
+    }
 }
