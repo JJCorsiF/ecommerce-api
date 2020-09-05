@@ -225,4 +225,19 @@ class PedidoTest extends TestCase
             return $mail->hasTo($cliente->email);
         });
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function umPedidoPodeSerGeradoEmPdf()
+    {
+        $pedido = Pedido::inRandomOrder()->first();
+
+        $response = $this->post('/pedidos/' . $pedido->id_pedido . '/report');
+        $response->assertStatus(200);
+
+        $response->assertHeader('Content-Type', 'application/pdf');
+    }
 }
