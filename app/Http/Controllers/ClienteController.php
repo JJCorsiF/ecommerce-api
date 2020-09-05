@@ -19,7 +19,7 @@ class ClienteController extends Controller
 
     public function buscarCliente($id)
     {
-        $cliente = Cliente::where('id_cliente', $id)->first();
+        $cliente = Cliente::where('id_cliente', $id)->orWhere('uuid_cliente', $id)->first();
 
         return response()->json([
             'cliente' => $cliente,
@@ -52,7 +52,7 @@ class ClienteController extends Controller
 
     public function atualizarCliente(Request $request, $id)
     {
-        $cliente = Cliente::where('id_cliente', $id)->firstOrFail();
+        $cliente = Cliente::where('id_cliente', $id)->orWhere('uuid_cliente', $id)->firstOrFail();
         $cliente->update($request->all());
 
         return response()->json([
@@ -62,7 +62,7 @@ class ClienteController extends Controller
 
     public function deletarCliente($id)
     {
-        $cliente = Cliente::where('id_cliente', $id)->firstOrFail();
+        $cliente = Cliente::where('id_cliente', $id)->orWhere('uuid_cliente', $id)->firstOrFail();
         $cliente->delete();
 
         return response()->json([

@@ -19,7 +19,7 @@ class ProdutoController extends Controller
 
     public function buscarProduto($id)
     {
-        $produto = Produto::where('id_produto', $id)->first();
+        $produto = Produto::where('id_produto', $id)->orWhere('uuid_produto', $id)->first();
 
         return response()->json([
             'produto' => $produto,
@@ -52,7 +52,7 @@ class ProdutoController extends Controller
 
     public function atualizarProduto(Request $request, $id)
     {
-        $produto = Produto::where('id_produto', $id)->firstOrFail();
+        $produto = Produto::where('id_produto', $id)->orWhere('uuid_produto', $id)->firstOrFail();
         $produto->update($request->all());
 
         return response()->json([
@@ -62,7 +62,7 @@ class ProdutoController extends Controller
 
     public function deletarProduto($id)
     {
-        $produto = Produto::where('id_produto', $id)->firstOrFail();
+        $produto = Produto::where('id_produto', $id)->orWhere('uuid_produto', $id)->firstOrFail();
         $produto->delete();
 
         return response()->json([
