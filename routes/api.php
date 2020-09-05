@@ -31,3 +31,4 @@ Route::delete('/produtos/{id}', 'ProdutoController@deletarProduto');
 
 Route::get('/pedidos', 'PedidoController@listarPedidos');
 Route::get('/pedidos/{id}', 'PedidoController@buscarPedido');
+Route::post('/pedidos', 'PedidoController@adicionarPedido');

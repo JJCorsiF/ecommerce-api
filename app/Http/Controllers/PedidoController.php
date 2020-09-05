@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Pedido;
+use App\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PedidoController extends Controller
 {
@@ -23,5 +25,38 @@ class PedidoController extends Controller
         return response()->json([
             'pedido' => $pedido,
         ], 200);
+    }
+
+    public function adicionarPedido(Request $request)
+    {
+        try {
+            $pedidoAAdicionar = $request->pedido;
+
+            $pedido = Pedido::create([
+                'id_cliente' => $pedidoAAdicionar['id_cliente'],
+                'uuid_pedido' => Str::uuid(),
+                'codigo_pedido' => $pedidoAAdicionar['codigo_pedido'],
+                'data_pedido' => $pedidoAAdicionar['data_pedido'],
+                'observacao' => $pedidoAAdicionar['observacao'],
+                'forma_pagamento' => $pedidoAAdicionar['forma_pagamento'],
+            ]);
+
+            $produtos = $pedidoAAdicionar['produtos'];
+
+            foreach ($produtos as $produtoDoPedido) {
+                $idDoProduto = $produtoDoPedido['id_produto'];
+                $produto = Produto::where('id_produto', $idDoProduto)->orWhere('uuid_produto', $idDoProduto)->first();
+
+                $pedido->produtos()->save($produto, ['quantidade' => $produtoDoPedido['quantidade'],]);
+            }
+
+            return response()->json([
+                'pedido' => $pedido,
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
