@@ -3,9 +3,11 @@
 namespace Tests\Feature;
 
 use App\Cliente;
+use App\Mail\PedidoRealizado;
 use App\Pedido;
 use App\Produto;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class PedidoTest extends TestCase
@@ -201,5 +203,26 @@ class PedidoTest extends TestCase
             'observacao' => $pedido->observacao,
             'forma_pagamento' => $pedido->forma_pagamento,
         ]);
+    }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function umPedidoPodeSerEnviadoPorEmail()
+    {
+        Mail::fake();
+
+        $pedido = Pedido::inRandomOrder()->first();
+
+        $cliente = Cliente::where('id_cliente', $pedido->id_cliente)->first();
+
+        $response = $this->post('/pedidos/' . $pedido->id_pedido . '/sendmail');
+        $response->assertStatus(200);
+
+        Mail::assertSent(PedidoRealizado::class, function ($mail) use ($cliente) {
+            return $mail->hasTo($cliente->email);
+        });
     }
 }

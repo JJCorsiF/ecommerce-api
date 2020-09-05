@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Cliente;
+use App\Mail\PedidoRealizado;
 use App\Pedido;
 use App\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class PedidoController extends Controller
@@ -91,5 +94,18 @@ class PedidoController extends Controller
         return response()->json([
             'pedido' => $pedido,
         ], 204);
+    }
+
+    public function enviarPedidoPorEmail($id)
+    {
+        $pedidoComProdutos = Pedido::with('produtos')->where('id_pedido', $id)->orWhere('uuid_pedido', $id)->first();
+        $cliente = Cliente::where('id_cliente', $pedidoComProdutos->id_cliente)->first();
+
+        Mail::to($cliente->email)->send(new PedidoRealizado($pedidoComProdutos, $cliente));
+
+        return response()->json([
+            'mensagem' => 'Email enviado com sucesso.',
+            'pedidoComProdutos' => $pedidoComProdutos,
+        ], 200);
     }
 }
