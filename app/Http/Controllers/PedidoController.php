@@ -15,4 +15,13 @@ class PedidoController extends Controller
             'pedidos' => $pedidos,
         ], 200);
     }
+
+    public function buscarPedido($id)
+    {
+        $pedido = Pedido::where('id_pedido', $id)->orWhere('uuid_pedido', $id)->first();
+
+        return response()->json([
+            'pedido' => $pedido,
+        ], 200);
+    }
 }
