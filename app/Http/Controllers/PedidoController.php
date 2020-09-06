@@ -73,12 +73,16 @@ class PedidoController extends Controller
 
             $produtos = $request->produtos;
 
+            $produtosAtualizados = [];
+
             foreach ($produtos as $produto) {
-                $pedido->produtos()->updateExistingPivot($produto['id_produto'], ['quantidade' => $produto['quantidade'],]);
+                $produtosAtualizados[$produto['id_produto']] = ['quantidade' => $produto['quantidade'],];
             }
 
+            $pedido->produtos()->sync($produtosAtualizados);
+
             return response()->json([
-                'pedido' => $pedido,
+                'pedido' => Pedido::with('produtos')->where('id_pedido', $id)->orWhere('uuid_pedido', $id)->firstOrFail(),
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
