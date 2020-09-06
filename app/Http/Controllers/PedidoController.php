@@ -15,7 +15,7 @@ class PedidoController extends Controller
 {
     public function listarPedidos()
     {
-        $pedidos = Pedido::all();
+        $pedidos = Pedido::with('produtos')->get();
 
         return response()->json([
             'pedidos' => $pedidos,
@@ -24,7 +24,7 @@ class PedidoController extends Controller
 
     public function buscarPedido($id)
     {
-        $pedido = Pedido::where('id_pedido', $id)->orWhere('uuid_pedido', $id)->first();
+        $pedido = Pedido::with('produtos')->where('id_pedido', $id)->orWhere('uuid_pedido', $id)->firstOrFail();
 
         return response()->json([
             'pedido' => $pedido,
@@ -49,7 +49,7 @@ class PedidoController extends Controller
 
             foreach ($produtos as $produtoDoPedido) {
                 $idDoProduto = $produtoDoPedido['id_produto'];
-                $produto = Produto::where('id_produto', $idDoProduto)->orWhere('uuid_produto', $idDoProduto)->first();
+                $produto = Produto::where('id_produto', $idDoProduto)->orWhere('uuid_produto', $idDoProduto)->firstOrFail();
 
                 $pedido->produtos()->save($produto, ['quantidade' => $produtoDoPedido['quantidade'],]);
             }
@@ -99,20 +99,21 @@ class PedidoController extends Controller
 
     public function enviarPedidoPorEmail($id)
     {
-        $pedidoComProdutos = Pedido::with('produtos')->where('id_pedido', $id)->orWhere('uuid_pedido', $id)->first();
+        $pedidoComProdutos = Pedido::with('produtos')->where('id_pedido', $id)->orWhere('uuid_pedido', $id)->firstOrFail();
+
         $cliente = Cliente::where('id_cliente', $pedidoComProdutos->id_cliente)->first();
 
         Mail::to($cliente->email)->send(new PedidoRealizado($pedidoComProdutos, $cliente));
 
         return response()->json([
             'mensagem' => 'Email enviado com sucesso.',
-            'pedidoComProdutos' => $pedidoComProdutos,
+            'pedido' => $pedidoComProdutos,
         ], 200);
     }
 
     public function gerarPedidoEmPdf($id)
     {
-        $pedidoComProdutos = Pedido::with('produtos')->where('id_pedido', $id)->orWhere('uuid_pedido', $id)->first();
+        $pedidoComProdutos = Pedido::with('produtos')->where('id_pedido', $id)->orWhere('uuid_pedido', $id)->firstOrFail();
         $cliente = Cliente::where('id_cliente', $pedidoComProdutos->id_cliente)->first();
 
         $data = ['title' => 'Seu pedido', 'pedido' => $pedidoComProdutos, 'cliente' => $cliente,];
