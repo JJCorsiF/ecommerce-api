@@ -1,0 +1,652 @@
+{
+	"info": {
+		"_postman_id": "04978870-4f6e-4ca6-8b3a-91bccea3f434",
+		"name": "E-Commerce API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Listar Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/clientes",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Cliente por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/clientes/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"clientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "cliente[codigo_cliente]",
+									"value": "Código do Cliente",
+									"type": "text"
+								},
+								{
+									"key": "cliente[nome]",
+									"value": "John Doe",
+									"type": "text"
+								},
+								{
+									"key": "cliente[cpf]",
+									"value": "98765432100",
+									"type": "text"
+								},
+								{
+									"key": "cliente[sexo]",
+									"value": "masculino",
+									"type": "text"
+								},
+								{
+									"key": "cliente[email]",
+									"value": "a@b.c",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/clientes",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "codigo_cliente",
+									"value": "Código do Cliente",
+									"type": "text"
+								},
+								{
+									"key": "nome",
+									"value": "John Doe",
+									"type": "text"
+								},
+								{
+									"key": "cpf",
+									"value": "98765432100",
+									"type": "text"
+								},
+								{
+									"key": "sexo",
+									"value": "masculino",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "a@b.c",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/clientes/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"clientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/clientes/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"clientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Produtos",
+			"item": [
+				{
+					"name": "Listar Produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/produtos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Produto por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/produtos/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"produtos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar Produto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "produto[codigo_produto]",
+									"value": "Código do Produto",
+									"type": "text"
+								},
+								{
+									"key": "produto[nome]",
+									"value": "Tecido",
+									"type": "text"
+								},
+								{
+									"key": "produto[cor]",
+									"value": "vermelho",
+									"type": "text"
+								},
+								{
+									"key": "produto[tamanho]",
+									"value": "médio",
+									"type": "text"
+								},
+								{
+									"key": "produto[valor]",
+									"value": "20.0",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/produtos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "codigo_produto",
+									"value": "Código do Produto",
+									"type": "text"
+								},
+								{
+									"key": "nome",
+									"value": "Tecido",
+									"type": "text"
+								},
+								{
+									"key": "cor",
+									"value": "vermelho",
+									"type": "text"
+								},
+								{
+									"key": "tamanho",
+									"value": "médio",
+									"type": "text"
+								},
+								{
+									"key": "valor",
+									"value": "20.0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/produtos/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"produtos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Produto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/produtos/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"produtos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "Listar Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/pedidos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Pedido por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/pedidos/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar Pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "pedido[id_cliente]",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "pedido[codigo_pedido]",
+									"value": "Código do Pedido",
+									"type": "text"
+								},
+								{
+									"key": "pedido[data_pedido]",
+									"value": "2020-09-05 14:54:26",
+									"type": "text"
+								},
+								{
+									"key": "pedido[observacao]",
+									"value": "pedido novo",
+									"type": "text"
+								},
+								{
+									"key": "pedido[forma_pagamento]",
+									"value": "dinheiro",
+									"type": "text"
+								},
+								{
+									"key": "pedido[produtos][0][id_produto]",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "pedido[produtos][0][quantidade]",
+									"value": "5",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/pedidos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Pedido",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id_cliente",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "codigo_pedido",
+									"value": "Código do Pedido",
+									"type": "text"
+								},
+								{
+									"key": "data_pedido",
+									"value": "2020-09-05 14:54:26",
+									"type": "text"
+								},
+								{
+									"key": "observacao",
+									"value": "pedido novo",
+									"type": "text"
+								},
+								{
+									"key": "forma_pagamento",
+									"value": "dinheiro",
+									"type": "text"
+								},
+								{
+									"key": "produtos[0][id_produto]",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "produtos[0][quantidade]",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/pedidos/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Pedido",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/pedidos/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enviar Pedido por Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/pedidos/1/sendmail",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"pedidos",
+								"1",
+								"sendmail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gerar Pedido Em PDF",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/pedidos/1/report",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"pedidos",
+								"1",
+								"report"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "91c36ef5-73ea-41e8-82e2-291d01ce7232",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "80ad587d-74c1-4a2f-9dbe-9cc9ef2fa75b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

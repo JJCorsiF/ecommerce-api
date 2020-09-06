@@ -1,12 +1,14 @@
 {
-    "name": "laravel/laravel",
+    "name": "jjcorsif/ecommerce-api",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Esta é uma API RESTful de exemplo para um sistema de E-commerce.",
     "keywords": [
+		"e-commerce",
+		"api",
         "framework",
         "laravel"
     ],
-    "license": "MIT",
+    "license": "GPL-3.0",
     "require": {
         "php": "^7.2.5",
         "barryvdh/laravel-dompdf": "^0.8.6",
