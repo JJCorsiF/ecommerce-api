@@ -49,6 +49,15 @@ Agora falta apenas a criação das tabelas no banco de dados criado. Para que as
 $ php artisan migrate
 ```
 
+## Testando a aplicação
+Para realizar os testes na aplicação, basta executar o seguinte comando:
+
+```bash
+$ php artisan test --env=testing
+```
+
+Recomendo utilizar outro banco de dados para os testes, para não afetar os dados do banco de produção. As configurações do banco de testes podem ser definidas no arquivo **.env.testing**. Caso não se importe em sobrescrever o banco de produção, basta executar o comando sem o parâmetro --env=testing.
+
 ## Acessando a aplicação
 Para iniciar a aplicação, execute o comando:
 
