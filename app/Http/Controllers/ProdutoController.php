@@ -45,7 +45,7 @@ class ProdutoController extends Controller
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
-                'error' => $e->getMessage(),
+                'error' => utf8_encode($e->getMessage()),
             ], 500);
         }
     }
