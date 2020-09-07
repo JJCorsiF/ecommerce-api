@@ -1,6 +1,10 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/JJCorsiF/ecommerce-api)
+
 # E-commerce API
 
 Esta é uma API RESTful de exemplo para um sistema de E-commerce. Foi desenvolvida e testada usando o PHP 7.3.19, utilizando o framework Laravel versão 7.24.
+
+A aplicação também está disponível no Gitpod pela URL: [Gitpod](https://gitpod.io/#https://github.com/JJCorsiF/ecommerce-api)
 
 ## Setup
 Para instalar a aplicação, acesse o diretório onde a aplicação rodará e clone a aplicação:
