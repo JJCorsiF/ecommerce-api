@@ -16,7 +16,25 @@ $ git clone git@github.com:JJCorsiF/ecommerce-api.git
 ## Configurando a aplicação
 Para que a aplicação possa funcionar corretamente, é necessário ter instalado no servidor o PHP com uma versão igual ou superior a 7.2.5. Além disso, o servidor deve ter as seguintes extensões PHP habilitadas para que o Laravel 7 possa funcionar corretamente: BCMath, Ctype, Fileinfo, JSON, Mbstring, OpenSSL, PDO, Tokenizer e XML. É necessário ter também um banco de dados MySQL criado e rodando e um usuário com acesso a esse banco.
 
-Para configurar a aplicação, copie o arquivo **.env.testing** e renomeie-o para **.env**. Em seguida, substitua o trecho onde aparece as constantes abaixo com as informações do banco de dados e do servidor de email de sua máquina/servidor.
+Para criar e configurar um banco de dados e um usuário com acesso a esse banco, execute os seguintes comandos:
+
+```bash
+$ mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS <NOME DO BANCO DE DADOS DA APLICACAO>;"
+$ mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS <NOME DO BANCO DE DADOS DE TESTES>;"
+$ mysql -u root -p -e "CREATE USER IF NOT EXISTS '<NOME DO USUÁRIO COM ACESSO AO BANCO>'@'localhost' IDENTIFIED BY '<SENHA DO USUARIO DO BANCO DE DADOS>';"
+$ mysql -u root -p -e "GRANT ALL PRIVILEGES ON <NOME DO BANCO DE DADOS DA APLICACAO>.* TO '<NOME DO USUÁRIO COM ACESSO AO BANCO>'@'localhost';"
+$ mysql -u root -p -e "GRANT ALL PRIVILEGES ON <NOME DO BANCO DE DADOS DE TESTES>.* TO '<NOME DO USUÁRIO COM ACESSO AO BANCO>'@'localhost';"
+$ mysql -u root -p -e "FLUSH PRIVILEGES;"
+$ mysql -u root -p -e "USE <NOME DO BANCO DE DADOS DA APLICACAO>;"
+```
+
+Para configurar a aplicação, copie o arquivo **.env.testing** e renomeie-o para **.env**:
+
+```bash
+$ cp .env.testing .env
+```
+
+Em seguida, substitua o trecho onde aparece as constantes abaixo com as informações do banco de dados e do servidor de email de sua máquina/servidor.
 
 ```
 (...)
